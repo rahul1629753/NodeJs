@@ -14,15 +14,19 @@
 
 // server.listen(4300);
 const express=require('express');
+const path=require('path');
 const app=express();
+const publicpath=path.join(__dirname,'public');
 
+// app.use(express.static(publicpath)); for call static file and send on browser!
 app.get('',(req,res)=>
 {
-   res.send("Hello This is home page");
+   res.sendFile(`${publicpath}/index.html`);
 });
-
-
 app.get('/About',(req,res)=>{
-  res.send("hello this is about page");
+  res.sendFile(`${publicpath}/about.html`);
+});
+app.get('*',(req,res)=>{
+  res.send("Page not found");
 });
 app.listen(3000);
